@@ -48,7 +48,7 @@ gulp.task('browser-reload', () => {
     browserSync.reload();
 });
 
-gulp.task('serve', () => {
+gulp.task('serve', ['default'], () => {
     browserSync({
         server: {
             baseDir: dest
