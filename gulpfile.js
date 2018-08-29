@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var stylus = require('gulp-stylus');
 var pug = require('gulp-pug');
 var uglify = require('gulp-uglify');
+var concat = require('gulp-concat');
 var clean = require('gulp-clean-dest');
 var del = require('del');
 var browserSync = require('browser-sync');
@@ -12,6 +13,7 @@ var dest = 'dist/';
 gulp.task('stylus', () => {
     return gulp.src(src + 'styl/**/*.styl')
         .pipe(stylus())
+        .pipe(concat('bundle.css'))
         .pipe(gulp.dest(dest + 'css/'));
 });
 

@@ -13,8 +13,10 @@
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-clean-dest": "^0.2.0",
+    "gulp-concat": "^2.6.1",
     "gulp-pug": "^4.0.1",
     "gulp-stylus": "^2.7.0",
     "gulp-uglify": "^3.0.1"
-  }
+  },
+  "dependencies": {}
 }
