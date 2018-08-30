@@ -1,10 +1,11 @@
+/* eslint-env node */
+
 var gulp = require('gulp');
 var stylus = require('gulp-stylus');
 var pug = require('gulp-pug');
 var composer = require('gulp-uglify/composer');
 var uglifyjs = require('uglify-es');
 var concat = require('gulp-concat');
-var clean = require('gulp-clean-dest');
 var del = require('del');
 var browserSync = require('browser-sync');
 var eslint = require('gulp-eslint');
