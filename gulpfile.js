@@ -40,13 +40,13 @@ gulp.task('static', () => {
         .pipe(gulp.dest(dest));
 });
 
-gulp.task('default', ['pug', 'uglify', 'static', 'stylus']);
+gulp.task('default', gulp.series(['pug', 'uglify', 'static', 'stylus']));
 
 gulp.task('watch', () => {
-    gulp.watch(src + 'styl/**/*.styl', ['stylus']);
-    gulp.watch(src + '**/*.pug', ['pug']);
-    gulp.watch(src + 'js/**/*.js', ['uglify']);
-    gulp.watch(src + 'static/**/*', ['static']);
+    gulp.watch(src + 'styl/**/*.styl', gulp.task('stylus'));
+    gulp.watch(src + '**/*.pug', gulp.task('pug'));
+    gulp.watch(src + 'js/**/*.js', gulp.task('uglify'));
+    gulp.watch(src + 'static/**/*', gulp.task('static'));
 });
 
 gulp.task('clean', () => {
@@ -57,15 +57,15 @@ gulp.task('browser-reload', () => {
     browserSync.reload();
 });
 
-gulp.task('serve', ['default'], () => {
+gulp.task('serve', gulp.series('default', () => {
     browserSync({
         server: {
             baseDir: dest
         }
     });
 
-    gulp.watch(src + 'styl/**/*.styl', ['stylus', 'browser-reload']);
-    gulp.watch(src + '**/*.pug', ['pug', 'browser-reload']);
-    gulp.watch(src + 'js/**/*.js', ['uglify', 'browser-reload']);
-    gulp.watch(src + 'static/**/*', ['static', 'browser-reload']);
-})
+    gulp.watch(src + 'styl/**/*.styl', gulp.series('stylus', 'browser-reload'));
+    gulp.watch(src + '**/*.pug', gulp.series('pug', 'browser-reload'));
+    gulp.watch(src + 'js/**/*.js', gulp.series('uglify', 'browser-reload'));
+    gulp.watch(src + 'static/**/*', gulp.series('static', 'browser-reload'));
+}))
